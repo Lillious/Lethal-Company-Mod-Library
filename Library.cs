@@ -3,12 +3,12 @@ using Lethal_Library;
 using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
-[assembly: MelonInfo(typeof(Lib), "Lethal Company Mod Library", "1.0.0", "Lillious")]
+[assembly: MelonInfo(typeof(Library, "Lethal Company Mod Library", "1.0.0", "Lillious")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 
 namespace Lethal_Library
 {
-    public class Lib : MelonMod
+    public class Library : MelonMod
     {
         /* Variables */
         private bool isInGame;
