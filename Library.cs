@@ -16,10 +16,15 @@ namespace Lethal_Library
 
         /* System */
 
-        // Update isInGame
-        public void UpdateIsInGame(bool IsInGame)
+        // Set isInGame
+        public void SetIsInGame(bool IsInGame)
         {
             isInGame = IsInGame;
+        }
+
+        public bool GetIsInGame()
+        {
+            return isInGame;
         }
 
         // Set anti-cheat status
@@ -34,10 +39,16 @@ namespace Lethal_Library
             return Player.isSpeedCheating;
         }
 
-        // Update isInMainMenu
-        public void UpdateIsInMainMenu(bool IsInMainMenu)
+        // Set isInMainMenu
+        public void SetIsInMainMenu(bool IsInMainMenu)
         {
             isInMainMenu = IsInMainMenu;
+        }
+
+        // Get isInMainMenu
+        public bool GetIsInMainMenu()
+        {
+            return isInMainMenu;
         }
 
         /* UI */
