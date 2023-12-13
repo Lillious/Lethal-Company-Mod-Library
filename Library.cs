@@ -593,12 +593,12 @@ namespace Lethal_Library
         {
             if (sceneName == "SampleSceneRelay")
             {
-                UpdateIsInGame(true);
+                SetIsInGame(true);
             }
 
             if (sceneName == "MainMenu")
             {
-                UpdateIsInMainMenu(true);
+                SetIsInMainMenu(true);
             }
         }
 
@@ -606,12 +606,12 @@ namespace Lethal_Library
         {
             if (sceneName == "SampleSceneRelay")
             {
-                UpdateIsInGame(false);
+                SetIsInGame(false);
             }
 
             if (sceneName == "MainMenu")
             {
-                UpdateIsInMainMenu(false);
+                SetIsInMainMenu(false);
             }
         }
     }
