@@ -390,16 +390,22 @@ namespace Lethal_Library
             return Player.isPlayerAlone;
         }
 
-        // Check player's sprint meter value
-        public float GetSprintMeterValue(PlayerControllerB Player)
+        // Check if player is inside the factory
+        public bool IsInsideFactory(PlayerControllerB Player)
         {
-            return Player.sprintMeter;
+            return Player.isInsideFactory;
         }
 
         // Check if player just connected
         public bool JustConnected(PlayerControllerB Player)
         {
             return Player.justConnected;
+        }
+
+        // Check player's sprint meter value
+        public float GetSprintMeterValue(PlayerControllerB Player)
+        {
+            return Player.sprintMeter;
         }
 
         // Set player's sprint meter value
