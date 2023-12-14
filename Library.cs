@@ -567,12 +567,22 @@ namespace Lethal_Library
             return Player.smoothLookMultiplier;
         }
 
-        //      Terminal
-
-        // Get Terminal
+        // Get Terminal Reference
         public Terminal GetTerminal()
         {
-            return GameObject.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
+            return Object.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
+        }
+
+        // Get Group Credits from Terminal
+        public int GetGroupCredits(Terminal Terminal)
+        {
+            return Terminal.groupCredits;
+        }
+
+        // Set Group Credits from Terminal
+        public void SetGroupCredits(Terminal Terminal, int GroupCredits)
+        {
+            Terminal.groupCredits = GroupCredits;
         }
     }
 }
