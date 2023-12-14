@@ -402,6 +402,18 @@ namespace Lethal_Library
             return Player.IsInspectingItem;
         }
 
+        // Get the player's jetpackcontrols status
+        public bool GetJetpackControls(PlayerControllerB Player)
+        {
+            return Player.jetpackControls;
+        }
+
+        // Set the player's jetpackcontrols status
+        public void SetJetpackControls(PlayerControllerB Player, bool JetpackControls)
+        {
+            Player.jetpackControls = JetpackControls;
+        }
+
         // Check if player is inside the ship
         public bool IsInsideShip(PlayerControllerB Player)
         {
