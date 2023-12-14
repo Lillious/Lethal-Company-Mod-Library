@@ -384,6 +384,12 @@ namespace Lethal_Library
             Player.serverPlayerPosition = ServerPosition;
         }
 
+        // Check if player is alone
+        public bool IsAlone(PlayerControllerB Player)
+        {
+            return Player.isPlayerAlone;
+        }
+
         // Check player's sprint meter value
         public float GetSprintMeterValue(PlayerControllerB Player)
         {
