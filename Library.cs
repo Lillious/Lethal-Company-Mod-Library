@@ -3,7 +3,7 @@ using Lethal_Library;
 using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
-[assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious")]
+[assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 
 namespace Lethal_Library
@@ -565,6 +565,14 @@ namespace Lethal_Library
         public float GetSmoothLookMultiplier(PlayerControllerB Player)
         {
             return Player.smoothLookMultiplier;
+        }
+
+        //      Terminal
+
+        // Get Terminal
+        public Terminal GetTerminal()
+        {
+            return GameObject.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
         }
     }
 }
