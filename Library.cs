@@ -10,22 +10,7 @@ namespace Lethal_Library
 {
     public class Library : MelonMod
     {
-        /* Variables */
-        private bool isInGame;
-        private bool isInMainMenu;
-
         /* System */
-
-        // Set isInGame
-        public void SetIsInGame(bool IsInGame)
-        {
-            isInGame = IsInGame;
-        }
-
-        public bool GetIsInGame()
-        {
-            return isInGame;
-        }
 
         // Set anti-cheat status
         public void SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)
@@ -39,24 +24,18 @@ namespace Lethal_Library
             return Player.isSpeedCheating;
         }
 
-        // Set isInMainMenu
-        public void SetIsInMainMenu(bool IsInMainMenu)
-        {
-            isInMainMenu = IsInMainMenu;
-        }
-
-        // Get isInMainMenu
-        public bool GetIsInMainMenu()
-        {
-            return isInMainMenu;
-        }
-
         /* UI */
 
         // Notification System
         public void SendNotification(string MessageBody, string ButtonText)
         {
-            GameObject.Find("Canvas").transform.Find("MenuManager").gameObject.GetComponent<MenuManager>().DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
+            GetCanvas().transform.Find("MenuManager").gameObject.GetComponent<MenuManager>().DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
+        }
+
+        // Get Reference to Canvas
+        public GameObject GetCanvas()
+        {
+            return GameObject.Find("Canvas").gameObject;
         }
 
         /* Player */
@@ -586,33 +565,6 @@ namespace Lethal_Library
         public float GetSmoothLookMultiplier(PlayerControllerB Player)
         {
             return Player.smoothLookMultiplier;
-        }
-
-        /* Unity Functions */
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                SetIsInGame(true);
-            }
-
-            if (sceneName == "MainMenu")
-            {
-                SetIsInMainMenu(true);
-            }
-        }
-
-        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                SetIsInGame(false);
-            }
-
-            if (sceneName == "MainMenu")
-            {
-                SetIsInMainMenu(false);
-            }
         }
     }
 }
