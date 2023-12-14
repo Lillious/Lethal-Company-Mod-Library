@@ -3,7 +3,7 @@ using Lethal_Library;
 using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
-[assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious")]
+[assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 
 namespace Lethal_Library
@@ -577,6 +577,13 @@ namespace Lethal_Library
             return Player.smoothLookMultiplier;
         }
 
+        /* Terminal */
+
+        // Get the terminal
+        public Terminal GetTerminal()
+        {
+            return GameObject.FindAnyObjectByType<Terminal>().gameObject.GetComponent<Terminal>();
+        }
         /* Unity Functions */
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
