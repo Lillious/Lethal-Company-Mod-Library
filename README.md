@@ -1,3 +1,4 @@
+Place Lethal_Library.dll in Lethal Company/UserLibs/
 # Usage
 ```cs
 using GameNetcodeStuff;
@@ -12,23 +13,6 @@ namespace Non_Lethal_Dev_Console
     public class Mod : MelonMod
     {
         static Library LC_Lib = new Library();
-        PlayerControllerB Player;
-
-        public void OnInitializeMelonMod()
-        {
-            if (LC_Lib.GetIsInGame())
-            {
-                Player = LC_Lib.GetPlayer("Player");
-            }
-        }
-
-        public override void OnUpdate()
-        {
-            if (Player != null)
-            {
-                LC_Lib.SetPlayerHealth(Player, 100);
-            }
-        }
     }
 }
 ```
