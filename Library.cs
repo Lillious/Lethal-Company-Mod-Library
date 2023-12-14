@@ -396,6 +396,12 @@ namespace Lethal_Library
             return Player.isInsideFactory;
         }
 
+        // Check if player is inside the elevator
+        public bool IsInsideElevator(PlayerControllerB Player)
+        {
+            return Player.isInElevator;
+        }
+
         // Check if player is inspecting an item
         public bool IsInspectingItem(PlayerControllerB Player)
         {
