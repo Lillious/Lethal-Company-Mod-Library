@@ -10,17 +10,7 @@ namespace Lethal_Library
 {
     public class Library : MelonMod
     {
-        /* Variables */
-        private bool isInGame;
-        private bool isInMainMenu;
-
         /* System */
-
-        // Update isInGame
-        public void UpdateIsInGame(bool IsInGame)
-        {
-            isInGame = IsInGame;
-        }
 
         // Set anti-cheat status
         public void SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)
@@ -34,18 +24,18 @@ namespace Lethal_Library
             return Player.isSpeedCheating;
         }
 
-        // Update isInMainMenu
-        public void UpdateIsInMainMenu(bool IsInMainMenu)
-        {
-            isInMainMenu = IsInMainMenu;
-        }
-
         /* UI */
 
         // Notification System
         public void SendNotification(string MessageBody, string ButtonText)
         {
-            GameObject.Find("Canvas").transform.Find("MenuManager").gameObject.GetComponent<MenuManager>().DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
+            GetCanvas().transform.Find("MenuManager").gameObject.GetComponent<MenuManager>().DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
+        }
+
+        // Get Reference to Canvas
+        public GameObject GetCanvas()
+        {
+            return GameObject.Find("Canvas").gameObject;
         }
 
         /* Player */
@@ -577,38 +567,13 @@ namespace Lethal_Library
             return Player.smoothLookMultiplier;
         }
 
-        /* Terminal */
+        //      Terminal
 
-        // Get the terminal
+        // Get Terminal
         public Terminal GetTerminal()
         {
-            return GameObject.FindAnyObjectByType<Terminal>().gameObject.GetComponent<Terminal>();
-        }
-        /* Unity Functions */
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                UpdateIsInGame(true);
-            }
 
-            if (sceneName == "MainMenu")
-            {
-                UpdateIsInMainMenu(true);
-            }
-        }
-
-        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                UpdateIsInGame(false);
-            }
-
-            if (sceneName == "MainMenu")
-            {
-                UpdateIsInMainMenu(false);
-            }
+            return GameObject.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
         }
     }
 }
