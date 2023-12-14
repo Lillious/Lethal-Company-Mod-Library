@@ -432,6 +432,18 @@ namespace Lethal_Library
             Player.jetpackControls = JetpackControls;
         }
 
+        // Get the player's health regen timer
+        public float GetHealthRegenTimer(PlayerControllerB Player)
+        {
+            return Player.healthRegenerateTimer;
+        }
+
+        // Set the player's health regen timer
+        public void SetHealthRegenTimer(PlayerControllerB Player, float HealthRegenTimer)
+        {
+            Player.healthRegenerateTimer = HealthRegenTimer;
+        }
+
         // Check if player is inside the ship
         public bool IsInsideShip(PlayerControllerB Player)
         {
@@ -442,6 +454,12 @@ namespace Lethal_Library
         public bool JustConnected(PlayerControllerB Player)
         {
             return Player.justConnected;
+        }
+
+        // Check if player has disconnected
+        public bool HasDisconnected(PlayerControllerB Player)
+        {
+            return Player.disconnectedMidGame;
         }
 
         // Check player's sprint meter value
