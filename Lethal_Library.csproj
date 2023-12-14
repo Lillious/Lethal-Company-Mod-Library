@@ -78,7 +78,7 @@
 	  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mods.cs" />
+    
     <Compile Include="Library.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

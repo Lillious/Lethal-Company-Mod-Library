@@ -572,7 +572,6 @@ namespace Lethal_Library
         // Get Terminal
         public Terminal GetTerminal()
         {
-
             return GameObject.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
         }
     }
