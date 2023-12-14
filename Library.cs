@@ -462,12 +462,6 @@ namespace Lethal_Library
             Player.DamagePlayer(Damage);
         }
 
-        // Heal player
-        public void HealPlayer(PlayerControllerB Player, int Health)
-        {
-            Player.DamagePlayer(-Health);
-        }
-
         // Drop all held items
         public void DropAllHeldItems(PlayerControllerB Player)
         {
