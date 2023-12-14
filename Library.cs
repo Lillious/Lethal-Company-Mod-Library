@@ -551,6 +551,18 @@ namespace Lethal_Library
         {
             return Player.playerClientId;
         }
+
+        // Get the player's suit id
+        public int GetPlayerSuitID(PlayerControllerB Player)
+        {
+            return Player.currentSuitID;
+        }
+
+        // Set the player's suit id
+        public void SetPlayerSuitID(PlayerControllerB Player, int SuitID)
+        {
+            Player.currentSuitID = SuitID;
+        }
         
         // Teleport player
         public void TeleportPlayer(PlayerControllerB Player, Vector3 Position)
