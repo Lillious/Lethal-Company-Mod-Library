@@ -563,6 +563,18 @@ namespace Lethal_Library
         {
             Player.currentSuitID = SuitID;
         }
+
+        // Get the player's carry weight
+        public float GetPlayerCarryWeight(PlayerControllerB Player)
+        {
+            return Player.carryWeight;
+        }
+
+        // Set the player's carry weight
+        public void SetPlayerCarryWeight(PlayerControllerB Player, float CarryWeight)
+        {
+            Player.carryWeight = CarryWeight;
+        }
         
         // Teleport player
         public void TeleportPlayer(PlayerControllerB Player, Vector3 Position)
