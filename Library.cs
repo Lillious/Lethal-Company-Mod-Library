@@ -558,6 +558,18 @@ namespace Lethal_Library
             Player.TeleportPlayer(Position);
         }
 
+        // Set the player's playercontroller status
+        public void SetPlayerController(PlayerControllerB Player, bool PlayerControllerEnabled)
+        {
+            Player.enabled = PlayerControllerEnabled;
+        }
+
+        // Get the player's playercontroller status
+        public bool GetPlayerController(PlayerControllerB Player)
+        {
+            return Player.enabled;
+        }
+
         /* Graphics */
 
         // Remove volumetric lighting
