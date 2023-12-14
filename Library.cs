@@ -396,6 +396,12 @@ namespace Lethal_Library
             return Player.isInsideFactory;
         }
 
+        // Check if player is inside the ship
+        public bool IsInsideShip(PlayerControllerB Player)
+        {
+            return Player.isInHangarShipRoom;
+        }
+
         // Check if player just connected
         public bool JustConnected(PlayerControllerB Player)
         {
