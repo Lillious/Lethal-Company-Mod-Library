@@ -41,9 +41,40 @@ namespace Lethal_Library
         /* Player */
 
         // Returns the player controller of the player
-        public PlayerControllerB GetPlayer(string Player)
+        public PlayerControllerB GetPlayer(string PlayerID)
         {
-            return GameObject.Find($"{Player}").gameObject.GetComponent<PlayerControllerB>();
+            int PlayerIDInt = int.Parse(PlayerID); 
+
+            if (PlayerIDInt == 1)
+            {
+                return GameObject.Find("Player").gameObject.GetComponent<PlayerControllerB>();
+            } else if (PlayerIDInt > 1)
+            {
+                return GameObject.Find($"Player ({PlayerIDInt - 1})").gameObject.GetComponent<PlayerControllerB>();
+            } else
+            {
+                return null;
+            }
+        }
+
+        public bool IsCurrentPlayer(PlayerControllerB Player)
+        {
+            return Player.isPlayerControlled;
+        }
+
+        public PlayerControllerB SearchForControlledPlayer()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (GetPlayer(i.ToString()) != null)
+                {
+                    if (IsCurrentPlayer(GetPlayer(i.ToString())))
+                    {
+                        return GetPlayer(i.ToString());
+                    }
+                }
+            }
+            return null;
         }
 
         // Set the player's health
