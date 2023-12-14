@@ -414,6 +414,12 @@ namespace Lethal_Library
             return Player.isClimbingLadder;
         }
 
+        // Check if player is holding an item
+        public bool IsHoldingItem(PlayerControllerB Player)
+        {
+            return Player.isHoldingObject;
+        }
+
         // Get the player's jetpackcontrols status
         public bool GetJetpackControls(PlayerControllerB Player)
         {
