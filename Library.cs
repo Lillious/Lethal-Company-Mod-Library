@@ -408,6 +408,12 @@ namespace Lethal_Library
             return Player.IsInspectingItem;
         }
 
+        // Check if player is climbing a ladder
+        public bool IsClimbingLadder(PlayerControllerB Player)
+        {
+            return Player.isClimbingLadder;
+        }
+
         // Get the player's jetpackcontrols status
         public bool GetJetpackControls(PlayerControllerB Player)
         {
