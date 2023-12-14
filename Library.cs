@@ -396,6 +396,12 @@ namespace Lethal_Library
             return Player.isInsideFactory;
         }
 
+        // Check if player is inspecting an item
+        public bool IsInspectingItem(PlayerControllerB Player)
+        {
+            return Player.IsInspectingItem;
+        }
+
         // Check if player is inside the ship
         public bool IsInsideShip(PlayerControllerB Player)
         {
