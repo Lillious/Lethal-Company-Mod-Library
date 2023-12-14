@@ -783,5 +783,17 @@ namespace Lethal_Library
         {
             return QuotaSettings.increaseSteepness;
         }
+
+        // Set quota deadline
+        public void SetQuotaDeadline(QuotaSettings QuotaSettings, int Days)
+        {
+            QuotaSettings.deadlineDaysAmount = Days;
+        }
+
+        // Get quota deadline
+        public int GetQuotaDeadline(QuotaSettings QuotaSettings)
+        {
+            return QuotaSettings.deadlineDaysAmount;
+        }
     }
 }
