@@ -759,5 +759,17 @@ namespace Lethal_Library
         {
             return QuotaSettings.startingQuota;
         }
+
+        // Set quota base increase
+        public void SetQuotaBaseIncrease(QuotaSettings QuotaSettings, int QuotaBaseIncrease)
+        {
+            QuotaSettings.baseIncrease = QuotaBaseIncrease;
+        }
+
+        // Get quota base increase
+        public float GetQuotaBaseIncrease(QuotaSettings QuotaSettings)
+        {
+            return QuotaSettings.baseIncrease;
+        }
     }
 }
