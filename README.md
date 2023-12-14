@@ -1,7 +1,6 @@
 Place Lethal_Library.dll in Lethal Company/UserLibs/
 # Usage
 ```cs
-using GameNetcodeStuff;
 using Lethal_Library;
 using MelonLoader;
 using Non_Lethal_Dev_Console;
