@@ -747,5 +747,17 @@ namespace Lethal_Library
         {
             return QuotaSettings.startingCredits;
         }
+
+        // Set the groups starting quota
+        public void SetGroupStartingQuota(QuotaSettings QuotaSettings, int GroupStartingQuota)
+        {
+            QuotaSettings.startingQuota = GroupStartingQuota;
+        }
+
+        // Get the groups starting quota
+        public int GetGroupStartingQuota(QuotaSettings QuotaSettings)
+        {
+            return QuotaSettings.startingQuota;
+        }
     }
 }
