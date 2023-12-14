@@ -396,6 +396,12 @@ namespace Lethal_Library
             return Player.sprintMeter;
         }
 
+        // Check if player just connected
+        public bool JustConnected(PlayerControllerB Player)
+        {
+            return Player.justConnected;
+        }
+
         // Set player's sprint meter value
         public void SetSprintMeterValue(PlayerControllerB Player, float SprintMeterValue)
         {
