@@ -723,5 +723,29 @@ namespace Lethal_Library
         {
             Terminal.groupCredits = GroupCredits;
         }
+
+        // Check if Terminal is in use
+        public bool IsTerminalInUse(Terminal Terminal)
+        {
+            return Terminal.terminalInUse;
+        }
+
+        // Get QuotaSettings reference
+        public QuotaSettings GetQuotaSettings(Terminal Terminal)
+        {
+            return Terminal.GetComponent<QuotaSettings>();
+        }
+    
+        // Set the groups starting credits
+        public void SetGroupStartingCredits(QuotaSettings QuotaSettings, int GroupStartingCredits)
+        {
+            QuotaSettings.startingCredits = GroupStartingCredits;
+        }
+
+        // Get the groups starting credits
+        public int GetGroupStartingCredits(QuotaSettings QuotaSettings)
+        {
+            return QuotaSettings.startingCredits;
+        }
     }
 }
