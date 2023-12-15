@@ -176,6 +176,12 @@ namespace Lethal_Library {
             return Player.drunkness;
         }
 
+        // Check if player is drunk
+        public bool IsDrunk(PlayerControllerB Player)
+        {
+            return Player.drunkness > 0;
+        }
+
         // Set the player's drunkness inertia
         public void SetDrunknessInertia(PlayerControllerB Player, float DrunknessInertia)
         {
