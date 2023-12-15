@@ -1,4 +1,5 @@
-Place Lethal_Library.dll in Lethal Company/UserLibs/
+# Installation
+Place Lethal_Library.dll in *Lethal Company/UserLibs/*
 # Usage
 ```cs
 using Lethal_Library;
