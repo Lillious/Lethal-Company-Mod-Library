@@ -393,15 +393,14 @@ namespace Lethal_Library {
         }
 
         // Get player's server position
-        public Vector3 GetServerPosition(PlayerControllerB Player)
+        public Vector3 GetPlayerPosition(PlayerControllerB Player)
         {
-            return Player.serverPlayerPosition;
+            return Player.transform.position;
         }
 
-        // Set player's server position
-        public void SetServerPosition(PlayerControllerB Player, Vector3 ServerPosition)
+        public Vector3 GetSpawnPoint(PlayerControllerB Player)
         {
-            Player.serverPlayerPosition = ServerPosition;
+            return Player.serverPlayerPosition;
         }
 
         // Check if player is alone
