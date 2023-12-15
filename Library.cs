@@ -332,12 +332,6 @@ namespace Lethal_Library {
             Player.isPlayerSliding = IsSliding;
         }
 
-        // Get player's sliding status
-        public bool GetSliding(PlayerControllerB Player)
-        {
-            return Player.isPlayerSliding;
-        }
-
         // Check if the player is sinking
         public bool IsSinking(PlayerControllerB Player)
         {
