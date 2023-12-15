@@ -29,13 +29,13 @@ namespace Lethal_Library
         // Notification System
         public void SendNotification(string MessageBody, string ButtonText)
         {
-            GetCanvas().transform.Find("MenuManager").gameObject.GetComponent<MenuManager>().DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
+            GetCanvas().transform.Find("MenuManager")?.gameObject.GetComponent<MenuManager>()?.DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
         }
 
         // Get Reference to Canvas
         public GameObject GetCanvas()
         {
-            return GameObject.Find("Canvas").gameObject;
+            return GameObject.Find("Canvas")?.gameObject;
         }
 
         /* Player */
@@ -45,16 +45,19 @@ namespace Lethal_Library
         {
             int PlayerIDInt = int.Parse(PlayerID); 
 
+            // PlayerIDInt is 1
             if (PlayerIDInt == 1)
             {
-                return GameObject.Find("Player").gameObject.GetComponent<PlayerControllerB>();
-            } else if (PlayerIDInt > 1)
-            {
-                return GameObject.Find($"Player ({PlayerIDInt - 1})").gameObject.GetComponent<PlayerControllerB>();
-            } else
-            {
-                return null;
+                return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
             }
+
+            // PlayerIDInt is anything greater than 1
+            if (PlayerIDInt > 1)
+            {
+                return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
+            }
+
+            return null;
         }
 
         public bool IsCurrentPlayer(PlayerControllerB Player)
@@ -128,7 +131,7 @@ namespace Lethal_Library
         // Remove the player's helmet
         public void RemoveHelmet(PlayerControllerB Player)
         {
-            GameObject PlayerHUDHelmetModel = GameObject.Find("PlayerHUDHelmetModel").gameObject;
+            GameObject PlayerHUDHelmetModel = GameObject.Find("PlayerHUDHelmetModel")?.gameObject;
             PlayerHUDHelmetModel.SetActive(false);
         }
 
@@ -637,13 +640,13 @@ namespace Lethal_Library
         // Get the player's camera
         public Camera GetCamera(PlayerControllerB Player)
         {
-            return Player.transform.Find("ScavengerModel").transform.Find("metarig").transform.Find("CameraContainer").transform.Find("MainCamera").GetComponent<Camera>();
+            return Player.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform?.Find("MainCamera")?.GetComponent<Camera>();
         }
 
         // Get HDAdditionalCameraData
         public HDAdditionalCameraData GetHDAdditionalCameraData(Camera Camera)
         {
-            return Camera.GetComponent<HDAdditionalCameraData>();
+            return Camera?.GetComponent<HDAdditionalCameraData>();
         }
 
         // Set the player's camera FOV
@@ -709,7 +712,7 @@ namespace Lethal_Library
         // Get Terminal Reference
         public Terminal GetTerminal()
         {
-            return Object.FindObjectOfType<Terminal>().gameObject.GetComponent<Terminal>();
+            return Object.FindObjectOfType<Terminal>()?.gameObject?.GetComponent<Terminal>();
         }
 
         // Get Group Credits from Terminal
@@ -733,7 +736,7 @@ namespace Lethal_Library
         // Get QuotaSettings reference
         public QuotaSettings GetQuotaSettings(Terminal Terminal)
         {
-            return Terminal.GetComponent<QuotaSettings>();
+            return Terminal?.GetComponent<QuotaSettings>();
         }
     
         // Set the groups starting credits
