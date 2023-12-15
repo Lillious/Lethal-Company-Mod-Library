@@ -243,13 +243,13 @@ namespace Lethal_Library {
         }
 
         // Set player's exhaustion
-        public void SetExhaustion(PlayerControllerB Player, bool isExhausted)
+        public void SetExhausted(PlayerControllerB Player, bool isExhausted)
         {
             Player.isExhausted = isExhausted;
         }
 
         // Get player's exhaustion
-        public bool GetExhaustion(PlayerControllerB Player)
+        public bool IsExhausted(PlayerControllerB Player)
         {
             return Player.isExhausted;
         }
