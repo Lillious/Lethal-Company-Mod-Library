@@ -11,14 +11,22 @@ namespace Lethal_Library {
     public class SharedData
     {
         public static bool IsInGame { get; set; }
+        public static bool IsInMainMenu { get; set; }
     }
 
     public class Library : MelonMod
     {
 
+        // Check if player is in game
         public bool IsInGame()
         {
             return SharedData.IsInGame;
+        }
+
+        // Check if player is in main menu
+        public bool IsInMainMenu()
+        {
+            return SharedData.IsInMainMenu;
         }
 
         // Set anti-cheat status
@@ -815,6 +823,11 @@ namespace Lethal_Library {
             {
                 SharedData.IsInGame = true;
             }
+
+            if (sceneName == "MainMenu")
+            {
+                SharedData.IsInMainMenu = true;
+            }
         }
 
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
@@ -822,6 +835,11 @@ namespace Lethal_Library {
             if (sceneName == "SampleSceneRelay")
             {
                 SharedData.IsInGame = false;
+            }
+
+            if (sceneName == "MainMenu")
+            {
+                SharedData.IsInMainMenu = false;
             }
         }
     }
