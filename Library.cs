@@ -303,7 +303,7 @@ namespace Lethal_Library {
         }
 
         // Get if player is under water
-        public bool GetUnderWater(PlayerControllerB Player)
+        public bool IsUnderWater(PlayerControllerB Player)
         {
             return Player.isUnderwater;
         }
