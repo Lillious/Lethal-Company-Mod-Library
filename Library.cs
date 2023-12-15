@@ -1,16 +1,25 @@
 ﻿using MelonLoader;
-using Lethal_Library;
 using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
+using Lethal_Library;
+#pragma warning disable CS0436 // Type conflicts with imported type
 [assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
+namespace Lethal_Library {
 
-namespace Lethal_Library
-{
+    public class SharedData
+    {
+        public static bool IsInGame { get; set; }
+    }
+
     public class Library : MelonMod
     {
-        /* System */
+
+        public bool IsInGame()
+        {
+            return SharedData.IsInGame;
+        }
 
         // Set anti-cheat status
         public void SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)
@@ -797,6 +806,23 @@ namespace Lethal_Library
         public int GetQuotaDeadline(QuotaSettings QuotaSettings)
         {
             return QuotaSettings.deadlineDaysAmount;
+        }
+
+        /*Unity functions*/
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+        {
+            if (sceneName == "SampleSceneRelay")
+            {
+                SharedData.IsInGame = true;
+            }
+        }
+
+        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
+        {
+            if (sceneName == "SampleSceneRelay")
+            {
+                SharedData.IsInGame = false;
+            }
         }
     }
 }
