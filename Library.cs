@@ -195,13 +195,13 @@ namespace Lethal_Library {
         }
 
         // Set the player's drunkness speed
-        public void SetDrunknessSpeed(PlayerControllerB Player, float DrunknessSpeed)
+        public void SetDrunkRecoveryTime(PlayerControllerB Player, float DrunknessSpeed)
         {
             Player.drunknessSpeed = DrunknessSpeed;
         }
 
         // Get the player's drunkness speed
-        public float GetDrunknessSpeed(PlayerControllerB Player)
+        public float GetDrunkRecoveryTime(PlayerControllerB Player)
         {
             return Player.drunknessSpeed;
         }
