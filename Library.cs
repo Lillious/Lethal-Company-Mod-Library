@@ -145,6 +145,13 @@ namespace Lethal_Library {
             return Player.isSprinting;
         }
 
+        // Add the player's helmet
+        public void AddHelmet(PlayerControllerB Player)
+        {
+            GameObject PlayerHUDHelmetModel = GameObject.Find("PlayerHUDHelmetModel")?.gameObject;
+            PlayerHUDHelmetModel.SetActive(true);
+        }
+
         // Remove the player's helmet
         public void RemoveHelmet(PlayerControllerB Player)
         {
