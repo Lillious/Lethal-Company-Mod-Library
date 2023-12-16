@@ -146,17 +146,19 @@ namespace Lethal_Library {
         }
 
         // Add the player's helmet
-        public void AddHelmet(PlayerControllerB Player)
+        public void AddHelmet()
         {
             GameObject PlayerHUDHelmetModel = GameObject.Find("PlayerHUDHelmetModel")?.gameObject;
-            PlayerHUDHelmetModel.SetActive(true);
+            // Set scale back to normal to render it
+            PlayerHUDHelmetModel.transform.localScale = new Vector3(0.36f, 0.49f, 0.49f);
         }
 
         // Remove the player's helmet
-        public void RemoveHelmet(PlayerControllerB Player)
+        public void RemoveHelmet()
         {
             GameObject PlayerHUDHelmetModel = GameObject.Find("PlayerHUDHelmetModel")?.gameObject;
-            PlayerHUDHelmetModel.SetActive(false);
+            // Set scale to 0 to prevent it from being rendered
+            PlayerHUDHelmetModel.transform.localScale = new Vector3(0, 0, 0);
         }
 
         // Set the player's climb speed
