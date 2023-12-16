@@ -45,6 +45,14 @@ namespace Mod_Example
 ```
 
 ## UI
+
+<br>
+
+> [!NOTE]
+> **Functions that handle the in-game UI**
+
+<br>
+
 - **SendNotification(string MessageBody, string ButtonText)** > `void`
   - Send a notification popup on the MainMenu scene
         
@@ -53,6 +61,13 @@ namespace Mod_Example
     
 ## Player
     
+<br>
+
+> [!NOTE]
+> **Functions that handle player properties**
+
+<br>
+
 - **SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)** > `void`
   - Set anti-cheat status
         
@@ -333,6 +348,14 @@ namespace Mod_Example
   - Get the player's playercontroller status
 
 ## Graphics
+
+<br>
+
+> [!NOTE]
+> **Functions that handle the in-game graphics**
+
+<br>
+
 - **RemoveVolumetricLighting()** > `void`
   - Remove volumetric lighting
 
@@ -343,6 +366,14 @@ namespace Mod_Example
   - Get Anti-Aliasing method
 
 ## Camera
+
+<br>
+
+> [!NOTE]
+> **Functions that handle the in-game player camera**
+
+<br>
+
 - **GetCamera(PlayerControllerB Player)** > `Camera`
   - Get the player's Camera
 
@@ -380,6 +411,14 @@ namespace Mod_Example
   - Get smooth look multiplier
 
 ## Terminal
+
+<br>
+
+> [!NOTE]
+> **Functions that handle the in-game terminal properties**
+
+<br>
+
 - **GetTerminal()** > `Terminal`
   - Get Terminal Reference
 
