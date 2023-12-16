@@ -1,6 +1,33 @@
-# Installation
-Place Lethal_Library.dll in *Lethal Company/UserLibs/*
-# Usage
+# Lethal Company Mod Library
+
+## Install Instructions
+
+<br>
+
+> [!TIP]
+> **Don't know how to install? Review the information below**
+
+### MelonLoader
+- Download [MelonLoader.Installer.exe](https://github.com/LavaGang/MelonLoader/releases/latest)
+- Run MelonLoader.Installer.exe
+- Click the **select** button.
+- Select Lethal Company.exe in your Game's Installation Folder.
+- Uncheck **Latest** and select version **v0.6.1** from the Drop-Down List.
+- Once the installation is successful, open the game through Steam.
+- Place **Lethal_Library.dll** into the newly created Mods folder inside the Game's Installation Folder.
+
+<br>
+
+### BepInEx
+
+<br>
+
+> [!WARNING]
+> **Not supported at this time**
+
+<br>
+
+## Usage
 ```cs
 using Lethal_Library;
 using MelonLoader;
@@ -16,6 +43,7 @@ namespace Mod_Example
     }
 }
 ```
+
 ## UI
 - **SendNotification(string MessageBody, string ButtonText)** > `void`
   - Send a notification popup on the MainMenu scene
