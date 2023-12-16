@@ -43,7 +43,7 @@ namespace Lethal_Library {
 
         /* UI */
 
-        // Notification System
+        // Send a notification popup on the MainMenu scene
         public void SendNotification(string MessageBody, string ButtonText)
         {
             GetCanvas().transform.Find("MenuManager")?.gameObject.GetComponent<MenuManager>()?.DisplayMenuNotification($"{MessageBody}", $"{ButtonText}");
@@ -194,13 +194,13 @@ namespace Lethal_Library {
             return Player.drunknessInertia;
         }
 
-        // Set the player's drunkness speed
+        // Set the player's drunkness recovery time
         public void SetDrunkRecoveryTime(PlayerControllerB Player, float DrunknessSpeed)
         {
             Player.drunknessSpeed = DrunknessSpeed;
         }
 
-        // Get the player's drunkness speed
+        // Get the player's drunkness recovery time
         public float GetDrunkRecoveryTime(PlayerControllerB Player)
         {
             return Player.drunknessSpeed;
@@ -308,7 +308,7 @@ namespace Lethal_Library {
             Player.isUnderwater = IsUnderWater;
         }
 
-        // Get if player is under water
+        // Check if player is under water
         public bool IsUnderWater(PlayerControllerB Player)
         {
             return Player.isUnderwater;
@@ -398,6 +398,7 @@ namespace Lethal_Library {
             return Player.transform.position;
         }
 
+        // Get the spawn point of the player
         public Vector3 GetSpawnPoint(PlayerControllerB Player)
         {
             return Player.serverPlayerPosition;
@@ -481,7 +482,7 @@ namespace Lethal_Library {
             return Player.disconnectedMidGame;
         }
 
-        // Check player's sprint meter value
+        // Get the player's sprint meter value
         public float GetSprintMeterValue(PlayerControllerB Player)
         {
             return Player.sprintMeter;
@@ -493,7 +494,7 @@ namespace Lethal_Library {
             Player.sprintMeter = SprintMeterValue;
         }
 
-        // Check player's throw power
+        // Get the player's throw power
         public float GetThrowPower(PlayerControllerB Player)
         {
             return Player.throwPower;
@@ -565,7 +566,7 @@ namespace Lethal_Library {
             Player.DropAllHeldItems();
         }
 
-        // Get the player's id
+        // Get the player's client id
         public ulong GetPlayerID(PlayerControllerB Player)
         {
             return Player.playerClientId;
@@ -725,6 +726,7 @@ namespace Lethal_Library {
             return Player.smoothLookMultiplier;
         }
 
+        /* Terminal */
         // Get Terminal Reference
         public Terminal GetTerminal()
         {
