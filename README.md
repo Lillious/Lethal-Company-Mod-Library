@@ -112,9 +112,12 @@ namespace Mod_Example
 
 - **GetSprintState(PlayerControllerB Player)** > `bool`
   - Get the player's sprint state
+ 
+- **AddHelmet()** > `void`
+  - Adds the current player's helmet
 
-- **RemoveHelmet(PlayerControllerB Player)** > `void`
-  - Remove the player's helmet
+- **RemoveHelmet()** > `void`
+  - Remove the current player's helmet
 
 - **SetClimbSpeed(PlayerControllerB Player, float ClimbSpeed)** > `void`
   - Set the player's climb speed
