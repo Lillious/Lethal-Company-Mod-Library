@@ -12,6 +12,7 @@ namespace Lethal_Library {
     {
         public static bool IsInGame { get; set; }
         public static bool IsInMainMenu { get; set; }
+        public static bool IsNoClip { get; set; }
     }
 
     public class Library : MelonMod
@@ -27,6 +28,11 @@ namespace Lethal_Library {
         public bool IsInMainMenu()
         {
             return SharedData.IsInMainMenu;
+        }
+
+        public bool IsNoClip()
+        {
+            return SharedData.IsNoClip;
         }
 
         // Set anti-cheat status
@@ -628,6 +634,23 @@ namespace Lethal_Library {
             return Player.enabled;
         }
 
+        // Toggle noclip
+        public void ToggleNoclip(PlayerControllerB Player, bool mode)
+        {
+            // Get player's rigidbody
+            CharacterController characterController = Player.GetComponent<CharacterController>();
+            if (mode)
+            {
+                characterController.enableOverlapRecovery = false;
+                SharedData.IsNoClip = true;
+            }
+            else
+            {
+                characterController.enableOverlapRecovery = true;
+                SharedData.IsNoClip = false;
+            }
+        }
+
         /* Graphics */
 
         // Remove volumetric lighting
@@ -766,9 +789,10 @@ namespace Lethal_Library {
         }
 
         // Get QuotaSettings reference
-        public QuotaSettings GetQuotaSettings(Terminal Terminal)
+        public QuotaSettings GetQuotaSettings()
         {
-            return Terminal?.GetComponent<QuotaSettings>();
+            QuotaSettings quotaSettings = new QuotaSettings();
+            return quotaSettings;
         }
     
         // Set the groups starting credits
