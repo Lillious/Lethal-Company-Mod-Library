@@ -60,20 +60,25 @@ namespace Lethal_Library {
         // Returns the player controller of the player
         public PlayerControllerB GetPlayer(string PlayerID)
         {
-            int PlayerIDInt = int.Parse(PlayerID); 
-
-            // PlayerIDInt is 1
-            if (PlayerIDInt == 1)
+            try
             {
-                return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
-            }
+                int PlayerIDInt = int.Parse(PlayerID);
 
-            // PlayerIDInt is anything greater than 1
-            if (PlayerIDInt > 1)
+                // PlayerIDInt is 1
+                if (PlayerIDInt == 1)
+                {
+                    return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
+                }
+
+                // PlayerIDInt is anything greater than 1
+                if (PlayerIDInt > 1)
+                {
+                    return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
+                }
+            } catch
             {
-                return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
+                return null;
             }
-
             return null;
         }
 
