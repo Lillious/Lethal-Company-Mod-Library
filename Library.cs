@@ -415,7 +415,7 @@ namespace Lethal_Library {
         // Get the spawn point of the player
         public Vector3 GetSpawnPoint(PlayerControllerB Player)
         {
-            return Player.serverPlayerPosition;
+            return new Vector3(7.5f, 0, -14.31f);
         }
 
         // Check if player is alone
