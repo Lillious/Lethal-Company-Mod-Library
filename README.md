@@ -344,11 +344,17 @@ namespace Mod_Example
 - **TeleportPlayer(PlayerControllerB Player, Vector3 Position)** > `void`
   - Teleport player
 
-- **SetPlayerController(PlayerControllerB Player, bool PlayerControllerEnabled)** > voidTYPE`
+- **SetPlayerController(PlayerControllerB Player, bool PlayerControllerEnabled)** > ``void``
   - Set the player's playercontroller status
 
 - **GetPlayerController(PlayerControllerB Player)** > `bool`
   - Get the player's playercontroller status
+
+- **ToggleNoclip(PlayerControllerB Player, bool mode)** > `void`
+  - Toggles noclip
+
+- **IsNoClip(PlayerControllerB Player, bool mode)** > `bool`
+  - Checks if current player is has noclip on
 
 ## Graphics
 
