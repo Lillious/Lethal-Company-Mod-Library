@@ -4,6 +4,8 @@ on:
   push:
       branches:
       - master
+      tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -11,7 +13,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Build the project
       run: dotnet build --configuration Release --no-restore
@@ -46,11 +48,7 @@ jobs:
       id: create_github_release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ steps.create_release.outputs.tag }}
-        release_name: Release ${{ steps.create_release.outputs.tag }}
         files: bin/Release/Lethal_Library.dll
-        draft: false
-        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
