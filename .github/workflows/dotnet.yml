@@ -10,7 +10,7 @@ jobs:
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '4.8.x'
+        dotnet-version: '6.0.0'
     - name: Install dependencies
       run: dotnet restore
     - name: Build
