@@ -6,6 +6,25 @@ jobs:
   build:
     runs-on: windows-2019
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --no-dependencies
+
+  release:
+    needs: build
+    runs-on: windows-2019
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: D:\a\Lethal-Company-Mod-Library\Lethal-Company-Mod-Library\bin\Debug\*   # Add the path to your build artifacts
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: Release ${{ github.run_number }}
+        body: |
+          Release notes for version ${{ github.run_number }}.
+
+    - name: Push to Release
+      run: git push origin ${{ steps.create_release.outputs.upload_url }}
