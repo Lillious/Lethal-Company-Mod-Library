@@ -48,7 +48,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: .
-        tag_name: ${{ steps.create_release.outputs.tag }}
-        title: Release ${{ steps.create_release.outputs.tag }}
+        name: Release ${{ github.ref_name }}
         body: |
-          Release ${{ steps.create_release.outputs.tag }}
+          Release ${{ github.ref_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
