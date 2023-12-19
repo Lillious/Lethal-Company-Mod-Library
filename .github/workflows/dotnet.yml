@@ -16,31 +16,35 @@ jobs:
     - name: Build the project
       run: dotnet build --no-restore --configuration Release
 
-  release:
-    needs: build
-    runs-on: windows-2019
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Git
+    - name: List Contents of bin/Release
       run: |
-        git config --global user.email "logan.brown@tylertech.com"
-        git config --global user.name "Logan Brown"
+        ls -R bin/Release
+
+  # release:
+  #   needs: build
+  #   runs-on: windows-2019
+
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v3
+
+  #   - name: Set up Git
+  #     run: |
+  #       git config --global user.email "logan.brown@tylertech.com"
+  #       git config --global user.name "Logan Brown"
       
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        body: "Release v${{ github.run_number }}"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Create Release
+  #     id: create_release
+  #     uses: actions/create-release@v1
+  #     with:
+  #       tag_name: v${{ github.run_number }}
+  #       release_name: Release v${{ github.run_number }}
+  #       body: "Release v${{ github.run_number }}"
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-    - name: Upload Release Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: Release-${{ github.run_number }}
-        path: bin/Release/*.dll
+  #   - name: Upload Release Artifact
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: Release-${{ github.run_number }}
+  #       path: bin/Release/*.dll
