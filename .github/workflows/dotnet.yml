@@ -47,4 +47,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Release-${{ github.run_number }}
-        path: bin\Release\*.dll
+        path: D:/a/Lethal-Company-Mod-Library/Lethal-Company-Mod-Library/bin/Release/Lethal_Library.dll
