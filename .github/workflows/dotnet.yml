@@ -42,13 +42,13 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Release-${{ steps.create_release.outputs.tag }}
-        path: bin/Release
+        path: .
 
     - name: Create GitHub Release
-      id: create_github_release
       uses: softprops/action-gh-release@v1
       with:
-        files: bin/Release/Lethal_Library.dll
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        files: .
+        tag_name: ${{ steps.create_release.outputs.tag }}
+        title: Release ${{ steps.create_release.outputs.tag }}
+        body: |
+          Release ${{ steps.create_release.outputs.tag }}
