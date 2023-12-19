@@ -10,4 +10,4 @@ jobs:
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
     - name: Build
-      run: dotnet build --no-restore --no-dependencies
+      run: dotnet build --no-restore --no-dependencies --ignore-failed-sources
