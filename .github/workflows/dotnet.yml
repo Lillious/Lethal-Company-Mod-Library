@@ -46,7 +46,11 @@ jobs:
       id: create_github_release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ steps.create_release.outputs.tag }}
+        release_name: Release ${{ steps.create_release.outputs.tag }}
         files: bin/Release/Lethal_Library.dll
+        draft: false
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
