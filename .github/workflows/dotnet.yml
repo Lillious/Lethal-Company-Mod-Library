@@ -46,6 +46,7 @@ jobs:
       id: create_github_release
       uses: actions/create-release@v1
       with:
+        token: ${{ GITHUB_TOKEN }}
         tag_name: ${{ steps.create_release.outputs.tag }}
         release_name: Release ${{ steps.create_release.outputs.tag }}
         body: |
