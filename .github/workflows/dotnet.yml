@@ -1,36 +1,55 @@
-name: Main
+name: Build and Release
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: windows-2019
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Build
-      run: dotnet build --no-restore --no-dependencies
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Build the project
+      run: dotnet build --configuration Release
 
   release:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Bump version
-      id: version
-      run: echo "v$(($(git describe --tags --abbrev=0 | tr -d 'v') + 1))" >> $GITHUB_ENV
+    runs-on: windows-2019
 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config --global user.email "logan.brown@tylertech.com
+        git config --global user.name "Logan Brown"
+      
     - name: Create Release
       id: create_release
-      run: echo "## Release ${{ steps.version.outputs.version }}" > changelog.md
-
-    - name: Commit and tag
       run: |
-        git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
-        git add changelog.md
-        git commit -m "chore(release): v${{ steps.version.outputs.version }}"
-        git tag "v${{ steps.version.outputs.version }}"
+        git tag -a v${{ github.run_number }} -m "Release v${{ github.run_number }}"
+        git push origin v${{ github.run_number }}
+        echo ::set-output name=tag::v${{ github.run_number }}
 
-    - name: Push to Release
-      run: git push origin "v${{ steps.version.outputs.version }}"
+    - name: Upload Release Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Release-${{ steps.create_release.outputs.tag }}
+        path: . 
+
+    - name: Create GitHub Release
+      id: create_github_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ steps.create_release.outputs.tag }}
+        release_name: Release ${{ steps.create_release.outputs.tag }}
+        body: |
+          Release ${{ steps.create_release.outputs.tag }}
+        draft: false
+        prerelease: false
+
