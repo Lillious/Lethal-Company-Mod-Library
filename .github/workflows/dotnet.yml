@@ -36,6 +36,9 @@ jobs:
         tag_name: v${{ github.run_number }}
         release_name: Release v${{ github.run_number }}
         body: "Release v${{ github.run_number }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
