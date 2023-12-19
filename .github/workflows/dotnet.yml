@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Git
       run: |
@@ -38,10 +38,9 @@ jobs:
         body: "Release v${{ github.run_number }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
       with:
         name: Release-${{ github.run_number }}
-        path: bin/Release
+        path: D:\a\Lethal-Company-Mod-Library\Lethal-Company-Mod-Library\bin\Release\Lethal_Library.dll
