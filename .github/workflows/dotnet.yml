@@ -31,7 +31,6 @@ jobs:
       with:
         tag_name: v${{ github.run_number }}
         release_name: Release v${{ github.run_number }}
-        body: "Release v${{ github.run_number }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
@@ -39,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Release-${{ github.run_number }}
-        path: bin/Release/Lethal_Library.dll
+        path: bin/Release/**.dll
