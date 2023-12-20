@@ -16,13 +16,9 @@ jobs:
     - name: Build the project
       run: dotnet build --no-restore --configuration Release
 
-  release:
-    needs: build
-    runs-on: windows-2019
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - name: List Contents of bin/Release
+      run: |
+        ls -R bin/Release
 
     - name: Set up Git
       run: |
@@ -38,13 +34,9 @@ jobs:
         body: "Release v${{ github.run_number }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: List Contents of bin/Release
-      run: |
-        ls -R bin/Release
       
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
       with:
         name: Release-${{ github.run_number }}
-        path: D:/a/Lethal-Company-Mod-Library/Lethal-Company-Mod-Library/bin/Release/**/*.dll
+        path: bin/Release/Lethal_Library.dll
