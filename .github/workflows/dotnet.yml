@@ -37,5 +37,5 @@ jobs:
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Release-${{ github.run_number }}
-        path: bin/Release/**.dll
+        name: Lethal_Library.dll
+        path: bin/Release/Lethal_Library.dll
