@@ -3,6 +3,7 @@ using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using Lethal_Library;
+using System.Collections.Generic;
 #pragma warning disable CS0436 // Type conflicts with imported type
 [assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
@@ -73,12 +74,14 @@ namespace Lethal_Library {
                 // PlayerIDInt is 1
                 if (PlayerIDInt == 1)
                 {
+                    MelonLogger.Msg($"Searching for player with ID {PlayerIDInt}");
                     return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
                 }
 
                 // PlayerIDInt is anything greater than 1
                 if (PlayerIDInt > 1)
                 {
+                    MelonLogger.Msg($"Searching for Player ({PlayerIDInt - 1})");
                     return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
                 }
             } catch
@@ -88,20 +91,26 @@ namespace Lethal_Library {
             return null;
         }
 
-        public bool IsCurrentPlayer(PlayerControllerB Player)
+        public bool IsHost ()
         {
-            return Player.isPlayerControlled;
+            return GameObject.Find("Player")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? false;
         }
 
         public PlayerControllerB SearchForControlledPlayer()
         {
-            for (int i = 0; i < 4; i++)
+
+            if (IsHost())
             {
-                if (GetPlayer(i.ToString()) != null)
+                return GameObject.Find("Player").GetComponent<PlayerControllerB>();
+            } else
+            {
+                for (int i = 0; i < 4; i++)
                 {
-                    if (IsCurrentPlayer(GetPlayer(i.ToString())))
+                    MelonLogger.Msg($"Searching for Player ({i})");
+                    var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                    if (Player != null)
                     {
-                        return GetPlayer(i.ToString());
+                        return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
                     }
                 }
             }
@@ -539,13 +548,13 @@ namespace Lethal_Library {
         }
 
         // Check if player's voice is muffeled
-        public bool IsVoiceMuffeled(PlayerControllerB Player)
+        public bool IsVoiceMuffled(PlayerControllerB Player)
         {
             return Player.voiceMuffledByEnemy;
         }
 
         // Set if player's voice is muffeled
-        public void SetVoiceMuffeled(PlayerControllerB Player, bool VoiceMuffeled)
+        public void SetVoiceMuffled(PlayerControllerB Player, bool VoiceMuffeled)
         {
             Player.voiceMuffledByEnemy = VoiceMuffeled;
         }
