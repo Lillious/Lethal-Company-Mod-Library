@@ -37,5 +37,13 @@ jobs:
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Lethal_Library.dll
+        name: Release Artifact
         path: bin/Release/Lethal_Library.dll
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: bin/Release/Lethal_Library.dll
+        asset_name: Lethal_Library.dll
+        asset_content_type: application/x-msdownload
