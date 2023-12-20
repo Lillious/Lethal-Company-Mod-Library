@@ -856,12 +856,6 @@ namespace Lethal_Library {
             return QuotaSettings.deadlineDaysAmount;
         }
 
-        // Item
-        public void SetHighScrap(GrabbableObject GrabbableObject)
-        {
-            GrabbableObject.SetScrapValue(500);
-        }
-
         /*Unity functions*/
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
