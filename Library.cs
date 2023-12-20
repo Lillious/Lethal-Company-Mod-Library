@@ -14,6 +14,7 @@ namespace Lethal_Library {
         public static bool IsInGame { get; set; }
         public static bool IsInMainMenu { get; set; }
         public static bool IsNoClip { get; set; }
+        public static bool IsInfiniteSprint { get; set; }
     }
 
     public class Library : MelonMod
@@ -657,6 +658,19 @@ namespace Lethal_Library {
             {
                 characterController.enableOverlapRecovery = true;
                 SharedData.IsNoClip = false;
+            }
+        }
+
+        public void ToggleInfiniteSprint(PlayerControllerB Player, bool mode)
+        {
+            if (mode)
+            {
+                Player.isSprinting = false;
+                SharedData.IsInfiniteSprint = true;
+            }
+            else
+            {
+                SharedData.IsInfiniteSprint = false;
             }
         }
 
