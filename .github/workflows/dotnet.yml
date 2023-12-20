@@ -16,10 +16,6 @@ jobs:
     - name: Build the project
       run: dotnet build --no-restore --configuration Release
 
-    - name: List Contents of bin/Release
-      run: |
-        ls -R bin/Release
-
     - name: Set up Git
       run: |
         git config --global user.email "logan.brown@tylertech.com"
@@ -29,16 +25,10 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
+        tag_name: v1.${{ github.run_number }}-a
+        release_name: Release v1.${{ github.run_number }}-a
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-    - name: Upload Release Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: Release Artifact
-        path: bin/Release/Lethal_Library.dll
 
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
