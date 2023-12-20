@@ -73,12 +73,14 @@ namespace Lethal_Library {
                 // PlayerIDInt is 1
                 if (PlayerIDInt == 1)
                 {
+                    MelonLogger.Msg($"Searching for player with ID {PlayerIDInt}");
                     return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
                 }
 
                 // PlayerIDInt is anything greater than 1
                 if (PlayerIDInt > 1)
                 {
+                    MelonLogger.Msg($"Searching for Player ({PlayerIDInt - 1})");
                     return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
                 }
             } catch
@@ -88,20 +90,26 @@ namespace Lethal_Library {
             return null;
         }
 
-        public bool IsCurrentPlayer(PlayerControllerB Player)
+        public bool IsHost ()
         {
-            return Player.isPlayerControlled;
+            return GameObject.Find("Player")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? false;
         }
 
         public PlayerControllerB SearchForControlledPlayer()
         {
-            for (int i = 0; i < 4; i++)
+
+            if (IsHost())
             {
-                if (GetPlayer(i.ToString()) != null)
+                return GameObject.Find("Player").GetComponent<PlayerControllerB>();
+            } else
+            {
+                for (int i = 0; i < 4; i++)
                 {
-                    if (IsCurrentPlayer(GetPlayer(i.ToString())))
+                    MelonLogger.Msg($"Searching for Player ({i})");
+                    var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                    if (Player != null)
                     {
-                        return GetPlayer(i.ToString());
+                        return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
                     }
                 }
             }
