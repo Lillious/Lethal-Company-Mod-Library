@@ -16,10 +16,6 @@ jobs:
     - name: Build the project
       run: dotnet build --no-restore --configuration Release
 
-    - name: List Contents of bin/Release
-      run: |
-        ls -R bin/Release
-
   release:
     needs: build
     runs-on: windows-2019
@@ -42,6 +38,10 @@ jobs:
         body: "Release v${{ github.run_number }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: List Contents of bin/Release
+      run: |
+        ls -R bin/Release
       
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v2
