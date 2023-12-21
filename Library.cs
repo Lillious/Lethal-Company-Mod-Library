@@ -14,6 +14,8 @@ namespace Lethal_Library {
         public static bool IsInGame { get; set; }
         public static bool IsInMainMenu { get; set; }
         public static bool IsNoClip { get; set; }
+        public static bool IsInfiniteSprint { get; set; }
+        public static bool Initialized { get; set; }
     }
 
     public class Library : MelonMod
@@ -31,9 +33,26 @@ namespace Lethal_Library {
             return SharedData.IsInMainMenu;
         }
 
+        // Check if mod has been initialized
+        public bool IsInitialized()
+        {
+            return SharedData.Initialized;
+        }
+
+        // Set the Initialzed status
+        public void SetInitialized(bool Initialized)
+        {
+            SharedData.Initialized = Initialized;
+        }
+
         public bool IsNoClip()
         {
             return SharedData.IsNoClip;
+        }
+
+        public bool IsInfiniteSprint()
+        {
+            return SharedData.IsInfiniteSprint;
         }
 
         // Set anti-cheat status
@@ -493,6 +512,12 @@ namespace Lethal_Library {
             Player.healthRegenerateTimer = HealthRegenTimer;
         }
 
+        // Set player is in hangar ship room
+        public void SetIsInHangarShipRoom(PlayerControllerB Player, bool IsInHangarShipRoom)
+        {
+            Player.isInHangarShipRoom = IsInHangarShipRoom;
+        }
+
         // Check if player is inside the ship
         public bool IsInsideShip(PlayerControllerB Player)
         {
@@ -660,6 +685,12 @@ namespace Lethal_Library {
             }
         }
 
+        // Toggle Infinite Sprint
+        public void ToggleInfiniteSprint(bool mode)
+        {
+            SharedData.IsInfiniteSprint = mode;
+        }
+
         /* Graphics */
 
         // Remove volumetric lighting
@@ -788,13 +819,19 @@ namespace Lethal_Library {
         // Set Group Credits from Terminal
         public void SetGroupCredits(Terminal Terminal, int GroupCredits)
         {
-            Terminal.groupCredits = GroupCredits;
+            Terminal.SyncGroupCreditsServerRpc(GroupCredits, GetDropshipItems(Terminal));
         }
 
         // Check if Terminal is in use
         public bool IsTerminalInUse(Terminal Terminal)
         {
             return Terminal.terminalInUse;
+        }
+
+        // Get number of items in dropship
+        public int GetDropshipItems(Terminal Terminal)
+        {
+            return Terminal.numberOfItemsInDropship;
         }
 
         // Get QuotaSettings reference
@@ -864,6 +901,25 @@ namespace Lethal_Library {
             return QuotaSettings.deadlineDaysAmount;
         }
 
+        /* Time Events */
+
+        // Get TimeOfDay reference
+        public TimeOfDay GetTimeReference()
+        {
+            return Object.FindObjectOfType<TimeOfDay>();
+        }
+
+        /* Ship Events */
+
+        // Eject all players from ship
+
+        // Force all players to ship
+        public void Eject ()
+        {
+            StartOfRound startOfRound = Object.FindObjectOfType<StartOfRound>();
+            startOfRound.ManuallyEjectPlayersServerRpc();
+        }
+
         /*Unity functions*/
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
@@ -875,6 +931,7 @@ namespace Lethal_Library {
             if (sceneName == "MainMenu")
             {
                 SharedData.IsInMainMenu = true;
+                SharedData.Initialized = false;
             }
         }
 
@@ -883,11 +940,13 @@ namespace Lethal_Library {
             if (sceneName == "SampleSceneRelay")
             {
                 SharedData.IsInGame = false;
+                SharedData.Initialized = false;
             }
 
             if (sceneName == "MainMenu")
             {
                 SharedData.IsInMainMenu = false;
+                SharedData.Initialized = false;
             }
         }
     }
