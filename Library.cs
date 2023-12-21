@@ -686,18 +686,10 @@ namespace Lethal_Library {
         }
 
         // Toggle Infinite Sprint
-        public void ToggleInfiniteSprint(PlayerControllerB Player, bool mode)
+        public void ToggleInfiniteSprint(bool mode)
         {
-            if (mode)
-            {
-                SharedData.IsInfiniteSprint = true;
-            }
-            else
-            {
-                SharedData.IsInfiniteSprint = false;
-            }
+            SharedData.IsInfiniteSprint = mode;
         }
-        
 
         /* Graphics */
 
