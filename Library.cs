@@ -3,6 +3,7 @@ using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using Lethal_Library;
+using System.Collections.Generic;
 #pragma warning disable CS0436 // Type conflicts with imported type
 [assembly: MelonInfo(typeof(Library), "Lethal Company Mod Library", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
@@ -547,13 +548,13 @@ namespace Lethal_Library {
         }
 
         // Check if player's voice is muffeled
-        public bool IsVoiceMuffeled(PlayerControllerB Player)
+        public bool IsVoiceMuffled(PlayerControllerB Player)
         {
             return Player.voiceMuffledByEnemy;
         }
 
         // Set if player's voice is muffeled
-        public void SetVoiceMuffeled(PlayerControllerB Player, bool VoiceMuffeled)
+        public void SetVoiceMuffled(PlayerControllerB Player, bool VoiceMuffeled)
         {
             Player.voiceMuffledByEnemy = VoiceMuffeled;
         }
