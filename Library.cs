@@ -37,6 +37,11 @@ namespace Lethal_Library {
             return SharedData.IsNoClip;
         }
 
+        public bool IsInfiniteSprint()
+        {
+            return SharedData.IsInfiniteSprint;
+        }
+
         // Set anti-cheat status
         public void SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)
         {
@@ -661,11 +666,11 @@ namespace Lethal_Library {
             }
         }
 
+        // Toggle Infinite Sprint
         public void ToggleInfiniteSprint(PlayerControllerB Player, bool mode)
         {
             if (mode)
             {
-                Player.isSprinting = false;
                 SharedData.IsInfiniteSprint = true;
             }
             else
@@ -673,6 +678,7 @@ namespace Lethal_Library {
                 SharedData.IsInfiniteSprint = false;
             }
         }
+        
 
         /* Graphics */
 
