@@ -787,13 +787,19 @@ namespace Lethal_Library {
         // Set Group Credits from Terminal
         public void SetGroupCredits(Terminal Terminal, int GroupCredits)
         {
-            Terminal.groupCredits = GroupCredits;
+            Terminal.SyncGroupCreditsServerRpc(GroupCredits, GetDropshipItems(Terminal));
         }
 
         // Check if Terminal is in use
         public bool IsTerminalInUse(Terminal Terminal)
         {
             return Terminal.terminalInUse;
+        }
+
+        // Get number of items in dropship
+        public int GetDropshipItems(Terminal Terminal)
+        {
+            return Terminal.numberOfItemsInDropship;
         }
 
         // Get QuotaSettings reference
