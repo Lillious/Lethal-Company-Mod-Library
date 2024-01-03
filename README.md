@@ -326,6 +326,9 @@ namespace Mod_Example
 - **DamagePlayer(PlayerControllerB Player, int Damage)** > `void`
   - Damage player
 
+- **KillPlayer(PlayerControllerB Player)** > `void`
+  - Kill player
+
 - **DropAllHeldItems(PlayerControllerB Player)** > `void`
   - Drop all held items
 

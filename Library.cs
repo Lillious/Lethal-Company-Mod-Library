@@ -640,7 +640,20 @@ namespace Lethal_Library {
         // Damage player
         public void DamagePlayer(PlayerControllerB Player, int Damage)
         {
-            Player.DamagePlayer(Damage);
+            // Check if damage will kill player
+            if (Player.health - Damage <= 0)
+            {
+                // Kill player
+                Player.DamagePlayerServerRpc(Damage, 0);
+                return;
+            }
+            Player.DamagePlayerServerRpc(Damage, (Player.health - Damage));
+        }
+
+        // Kill Player
+        public void KillPlayer(PlayerControllerB Player)
+        {
+            Player.DamagePlayerServerRpc(Player.health, 0);
         }
 
         // Drop all held items
