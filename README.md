@@ -358,7 +358,13 @@ namespace Mod_Example
 
 - **IsNoClip(PlayerControllerB Player, bool mode)** > `bool`
   - Checks if current player is has noclip on
-
+ 
+- **ToggleInfiniteSprint(bool mode)** > `void`
+  - Toggles infinite sprint
+ 
+- **IsInfiniteSprint()** > `bool`
+  - Checks if player has infinite sprint
+    
 ## Graphics
 
 <br>
