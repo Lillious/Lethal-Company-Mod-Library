@@ -83,6 +83,48 @@ namespace Lethal_Library {
 
         /* Player */
 
+        // Returns the players name
+        public string GetPlayerName(PlayerControllerB Player)
+        {
+            try
+            {
+                if (Player == null) return null;
+                return Player.playerUsername;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        // Returns the player controller of the player by name
+        public PlayerControllerB GetPlayerByName(string PlayerName)
+        {
+            try
+            {
+                // Create a list of all players in the game
+                List<PlayerControllerB> Players = GetAllPlayers();
+                // Loop through all players in the game
+                foreach (PlayerControllerB Player in Players)
+                {
+                    // Check if player is null (shouldn't happen)
+                    if (Player == null) continue;
+
+                    // Check if the player's name matches the name we are searching for
+                    if (GetPlayerName(Player) == PlayerName)
+                    {
+                        return Player;
+                    }
+                }
+
+                return null;
+
+            } catch
+            {
+                return null;
+            }
+        }
+
         // Returns the player controller of the player
         public PlayerControllerB GetPlayer(string PlayerID)
         {
@@ -93,15 +135,31 @@ namespace Lethal_Library {
                 // PlayerIDInt is 1
                 if (PlayerIDInt == 1)
                 {
-                    MelonLogger.Msg($"Searching for player with ID {PlayerIDInt}");
-                    return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
+                    MelonLogger.Msg($"Searching for Player");
+                    PlayerControllerB player = GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>() ?? null;
+                    MelonLogger.Msg($"Found {GetPlayerName(player)}");
+                    return player;
                 }
 
                 // PlayerIDInt is anything greater than 1
                 if (PlayerIDInt > 1)
                 {
                     MelonLogger.Msg($"Searching for Player ({PlayerIDInt - 1})");
-                    return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
+                    PlayerControllerB player = GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>() ?? null;
+                    // Player controller exists
+                    if (player != null)
+                    {
+                        // Check if player is being controlled by a player
+                        if (SearchForPlayer(player))
+                        {
+                            MelonLogger.Msg($"Found {GetPlayerName(player)}");
+                            return player;
+                        }
+
+                        // Player is not being controlled by a player
+                        return null;
+                    }
+                    return null;
                 }
             } catch
             {
@@ -110,30 +168,67 @@ namespace Lethal_Library {
             return null;
         }
 
+        // Check if a given is being controlled by a player
+        public bool SearchForPlayer(PlayerControllerB Player)
+        {
+            if (Player.isPlayerControlled)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Check if player is host
         public bool IsHost ()
         {
             return GameObject.Find("Player")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? false;
         }
 
+        // Search for the player controller of the player
         public PlayerControllerB SearchForControlledPlayer()
         {
 
             if (IsHost())
             {
                 return GameObject.Find("Player").GetComponent<PlayerControllerB>();
-            } else
+            }
+
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
+                MelonLogger.Msg($"Searching for Player ({i})");
+                var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                if (Player != null)
                 {
-                    MelonLogger.Msg($"Searching for Player ({i})");
-                    var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
-                    if (Player != null)
-                    {
-                        return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
-                    }
+                    return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
                 }
             }
+
             return null;
+        }
+
+        // Return all players in the game that are being controlled by a player
+        public List<PlayerControllerB> GetAllPlayers()
+        {
+            List<PlayerControllerB> Players = new List<PlayerControllerB>
+            {
+                // Add host
+                GameObject.Find("Player")?.GetComponent<PlayerControllerB>()
+            };
+
+            // Add all other players
+            for (int i = 0; i < 4; i++)
+            {
+                var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                if (Player != null)
+                {
+                    Players.Add(GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>());
+                }
+            }
+
+            return Players;
         }
 
         // Set the player's health
@@ -611,7 +706,27 @@ namespace Lethal_Library {
         // Damage player
         public void DamagePlayer(PlayerControllerB Player, int Damage)
         {
-            Player.DamagePlayer(Damage);
+            // 1 damage = 2 health for some reason
+            Player.DamagePlayerFromOtherClientServerRpc(Mathf.Abs(Damage / 2), Vector3.zero, 0);
+        }
+
+        // Heal player to full health
+        public void HealPlayer(PlayerControllerB Player)
+        {
+            Player.DamagePlayerFromOtherClientClientRpc(0, Vector3.zero, 0, 100);
+        }
+
+        // Kill Player
+        public void KillPlayer(PlayerControllerB Player)
+        {
+            Player.DamagePlayerFromOtherClientServerRpc(100, Vector3.zero, 0);
+        }
+
+        // Apply force to player
+        public void ApplyForceToPlayer(PlayerControllerB Player, Vector3 Force)
+        {
+            Rigidbody rigidbody = Player.GetComponent<Rigidbody>();
+            rigidbody.AddForce(Force);
         }
 
         // Drop all held items
@@ -654,6 +769,21 @@ namespace Lethal_Library {
         public void TeleportPlayer(PlayerControllerB Player, Vector3 Position)
         {
             Player.TeleportPlayer(Position);
+        }
+
+        // Teleport to another player by name
+        public void TeleportToPlayer(PlayerControllerB Player, string PlayerName)
+        {
+            PlayerControllerB PlayerToTeleportTo = GetPlayerByName(PlayerName);
+            TeleportPlayer(Player, GetPlayerPosition(PlayerToTeleportTo));
+        }
+
+        // Teleport a player to another player by names
+        public void TeleportPlayerToPlayer(string PlayerName, string PlayerToTeleportToName)
+        {
+            PlayerControllerB Player = GetPlayerByName(PlayerName);
+            PlayerControllerB PlayerToTeleportTo = GetPlayerByName(PlayerToTeleportToName);
+            TeleportPlayer(Player, GetPlayerPosition(PlayerToTeleportTo));
         }
 
         // Set the player's playercontroller status

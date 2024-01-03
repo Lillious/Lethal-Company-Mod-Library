@@ -79,15 +79,27 @@ namespace Mod_Example
     
 - **IsInMainMenu()** > `bool`
   - Checks if the player is currently in the main menu
-    
+
+- **GetPlayerName(PlayerControllerB Player)** > `string`
+  - Returns the players name
+
+- **GetPlayerByName(string PlayerName)** > `PlayerControllerB`
+  - Returns the player controller of the player
+
 - **GetPlayer(string PlayerID)** > `PlayerControllerB`
   - Returns the player controller of the player
+
+- **GetAllPlayers()** > `List<PlayerControllerB>`
+  - Returns all currently controlled players
 
 - **IsCurrentPlayer(PlayerControllerB Player)** > `bool`
   - Checks if the player is the current player
 
 - **SearchForControlledPlayer()** > `PlayerControllerB`
   - Searches for the currently controlled player
+
+- **SearchForPlayer(PlayerControllerB Player)** > `PlayerControllerB`
+  - Checks if a player is currently being controlled
 
 - **SetPlayerHealth(PlayerControllerB Player, int Healt)** > `void`
   - Set the player's health
@@ -323,6 +335,9 @@ namespace Mod_Example
 - **DamagePlayer(PlayerControllerB Player, int Damage)** > `void`
   - Damage player
 
+- **KillPlayer(PlayerControllerB Player)** > `void`
+  - Kill player
+
 - **DropAllHeldItems(PlayerControllerB Player)** > `void`
   - Drop all held items
 
@@ -343,6 +358,12 @@ namespace Mod_Example
 
 - **TeleportPlayer(PlayerControllerB Player, Vector3 Position)** > `void`
   - Teleport player
+
+- **TeleportToPlayer(PlayerControllerB Player, string PlayerName)** > `void`
+  - Teleport to player
+
+- **TeleportPlayerToPlayer(string PlayerName, string PlayerToTeleportToName)** > `void`
+  - Teleport a player to another player
 
 - **SetPlayerController(PlayerControllerB Player, bool PlayerControllerEnabled)** > ``void``
   - Set the player's playercontroller status
