@@ -79,9 +79,18 @@ namespace Mod_Example
     
 - **IsInMainMenu()** > `bool`
   - Checks if the player is currently in the main menu
-    
+
+- **GetPlayerName(PlayerControllerB Player)** > `string`
+  - Returns the players name
+
+- **GetPlayerByName(string PlayerName)** > `PlayerControllerB`
+  - Returns the player controller of the player
+
 - **GetPlayer(string PlayerID)** > `PlayerControllerB`
   - Returns the player controller of the player
+
+- **GetAllPlayers()** > `List<PlayerControllerB>`
+  - Returns all currently controlled players
 
 - **IsCurrentPlayer(PlayerControllerB Player)** > `bool`
   - Checks if the player is the current player

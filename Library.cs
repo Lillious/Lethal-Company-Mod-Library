@@ -83,6 +83,37 @@ namespace Lethal_Library {
 
         /* Player */
 
+        // Returns the players name
+        public string GetPlayerName(PlayerControllerB Player)
+        {
+            return Player.playerUsername ?? "Unknown";
+        }
+
+        // Returns the player controller of the player by name
+        public PlayerControllerB GetPlayerByName(string PlayerName)
+        {
+            try
+            {
+                // Create a list of all players in the game
+                List<PlayerControllerB> Players = GetAllPlayers();
+                // Loop through all players in the game
+                foreach (PlayerControllerB Player in Players)
+                {
+                    // Check if the player's name matches the name we are searching for
+                    if (GetPlayerName(Player) == PlayerName)
+                    {
+                        return Player;
+                    }
+                }
+
+                return null;
+
+            } catch
+            {
+                return null;
+            }
+        }
+
         // Returns the player controller of the player
         public PlayerControllerB GetPlayer(string PlayerID)
         {
@@ -94,8 +125,9 @@ namespace Lethal_Library {
                 if (PlayerIDInt == 1)
                 {
                     MelonLogger.Msg($"Searching for Player");
-                    // We don't need to check if the player is being controlled by a player because the host is always player 1
-                    return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
+                    PlayerControllerB player = GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>() ?? null;
+                    MelonLogger.Msg($"Found {GetPlayerName(player)}");
+                    return player;
                 }
 
                 // PlayerIDInt is anything greater than 1
@@ -109,6 +141,7 @@ namespace Lethal_Library {
                         // Check if player is being controlled by a player
                         if (SearchForPlayer(player))
                         {
+                            MelonLogger.Msg($"Found {GetPlayerName(player)}");
                             return player;
                         }
 
@@ -163,6 +196,28 @@ namespace Lethal_Library {
             }
 
             return null;
+        }
+
+        // Return all players in the game that are being controlled by a player
+        public List<PlayerControllerB> GetAllPlayers()
+        {
+            List<PlayerControllerB> Players = new List<PlayerControllerB>
+            {
+                // Add host
+                GameObject.Find("Player")?.GetComponent<PlayerControllerB>()
+            };
+
+            // Add all other players
+            for (int i = 0; i < 4; i++)
+            {
+                var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                if (Player != null)
+                {
+                    Players.Add(GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>());
+                }
+            }
+
+            return Players;
         }
 
         // Set the player's health
@@ -640,6 +695,8 @@ namespace Lethal_Library {
         // Damage player
         public void DamagePlayer(PlayerControllerB Player, int Damage)
         {
+            // Make sure damage is positive
+            Damage = Mathf.Abs(Damage);
             // Check if damage will kill player
             if (Player.health - Damage <= 0)
             {
@@ -654,6 +711,13 @@ namespace Lethal_Library {
         public void KillPlayer(PlayerControllerB Player)
         {
             Player.DamagePlayerServerRpc(Player.health, 0);
+        }
+
+        // Apply force to player
+        public void ApplyForceToPlayer(PlayerControllerB Player, Vector3 Force)
+        {
+            Rigidbody rigidbody = Player.GetComponent<Rigidbody>();
+            rigidbody.AddForce(Force);
         }
 
         // Drop all held items
