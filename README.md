@@ -89,6 +89,9 @@ namespace Mod_Example
 - **SearchForControlledPlayer()** > `PlayerControllerB`
   - Searches for the currently controlled player
 
+- **SearchForPlayer(PlayerControllerB Player)** > `PlayerControllerB`
+  - Checks if a player is currently being controlled
+
 - **SetPlayerHealth(PlayerControllerB Player, int Healt)** > `void`
   - Set the player's health
 

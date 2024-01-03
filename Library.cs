@@ -93,7 +93,8 @@ namespace Lethal_Library {
                 // PlayerIDInt is 1
                 if (PlayerIDInt == 1)
                 {
-                    MelonLogger.Msg($"Searching for player with ID {PlayerIDInt}");
+                    MelonLogger.Msg($"Searching for Player");
+                    // We don't need to check if the player is being controlled by a player because the host is always player 1
                     return GameObject.Find("Player")?.gameObject?.GetComponent<PlayerControllerB>();
                 }
 
@@ -101,7 +102,20 @@ namespace Lethal_Library {
                 if (PlayerIDInt > 1)
                 {
                     MelonLogger.Msg($"Searching for Player ({PlayerIDInt - 1})");
-                    return GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>();
+                    PlayerControllerB player = GameObject.Find($"Player ({PlayerIDInt - 1})")?.gameObject?.GetComponent<PlayerControllerB>() ?? null;
+                    // Player controller exists
+                    if (player != null)
+                    {
+                        // Check if player is being controlled by a player
+                        if (SearchForPlayer(player))
+                        {
+                            return player;
+                        }
+
+                        // Player is not being controlled by a player
+                        return null;
+                    }
+                    return null;
                 }
             } catch
             {
@@ -110,29 +124,44 @@ namespace Lethal_Library {
             return null;
         }
 
+        // Check if a given is being controlled by a player
+        public bool SearchForPlayer(PlayerControllerB Player)
+        {
+            if (Player.isPlayerControlled)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Check if player is host
         public bool IsHost ()
         {
             return GameObject.Find("Player")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? false;
         }
 
+        // Search for the player controller of the player
         public PlayerControllerB SearchForControlledPlayer()
         {
 
             if (IsHost())
             {
                 return GameObject.Find("Player").GetComponent<PlayerControllerB>();
-            } else
+            }
+
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
+                MelonLogger.Msg($"Searching for Player ({i})");
+                var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
+                if (Player != null)
                 {
-                    MelonLogger.Msg($"Searching for Player ({i})");
-                    var Player = GameObject.Find($"Player ({i})")?.transform?.Find("ScavengerModel")?.transform?.Find("metarig")?.transform?.Find("CameraContainer")?.transform.Find("MainCamera")?.GetComponent<Camera>().enabled ?? null;
-                    if (Player != null)
-                    {
-                        return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
-                    }
+                    return GameObject.Find($"Player ({i})").GetComponent<PlayerControllerB>();
                 }
             }
+
             return null;
         }
 
