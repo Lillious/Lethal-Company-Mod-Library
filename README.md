@@ -359,6 +359,12 @@ namespace Mod_Example
 - **TeleportPlayer(PlayerControllerB Player, Vector3 Position)** > `void`
   - Teleport player
 
+- **TeleportToPlayer(PlayerControllerB Player, string PlayerName)** > `void`
+  - Teleport to player
+
+- **TeleportPlayerToPlayer(string PlayerName, string PlayerToTeleportToName)** > `void`
+  - Teleport a player to another player
+
 - **SetPlayerController(PlayerControllerB Player, bool PlayerControllerEnabled)** > ``void``
   - Set the player's playercontroller status
 

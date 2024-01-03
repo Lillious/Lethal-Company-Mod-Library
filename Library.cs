@@ -86,7 +86,15 @@ namespace Lethal_Library {
         // Returns the players name
         public string GetPlayerName(PlayerControllerB Player)
         {
-            return Player.playerUsername ?? "Unknown";
+            try
+            {
+                if (Player == null) return null;
+                return Player.playerUsername;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // Returns the player controller of the player by name
@@ -99,6 +107,9 @@ namespace Lethal_Library {
                 // Loop through all players in the game
                 foreach (PlayerControllerB Player in Players)
                 {
+                    // Check if player is null (shouldn't happen)
+                    if (Player == null) continue;
+
                     // Check if the player's name matches the name we are searching for
                     if (GetPlayerName(Player) == PlayerName)
                     {
@@ -695,22 +706,20 @@ namespace Lethal_Library {
         // Damage player
         public void DamagePlayer(PlayerControllerB Player, int Damage)
         {
-            // Make sure damage is positive
-            Damage = Mathf.Abs(Damage);
-            // Check if damage will kill player
-            if (Player.health - Damage <= 0)
-            {
-                // Kill player
-                Player.DamagePlayerServerRpc(Damage, 0);
-                return;
-            }
-            Player.DamagePlayerServerRpc(Damage, (Player.health - Damage));
+            // 1 damage = 2 health for some reason
+            Player.DamagePlayerFromOtherClientServerRpc(Mathf.Abs(Damage / 2), Vector3.zero, 0);
+        }
+
+        // Heal player to full health
+        public void HealPlayer(PlayerControllerB Player)
+        {
+            Player.DamagePlayerFromOtherClientClientRpc(0, Vector3.zero, 0, 100);
         }
 
         // Kill Player
         public void KillPlayer(PlayerControllerB Player)
         {
-            Player.DamagePlayerServerRpc(Player.health, 0);
+            Player.DamagePlayerFromOtherClientServerRpc(100, Vector3.zero, 0);
         }
 
         // Apply force to player
@@ -760,6 +769,21 @@ namespace Lethal_Library {
         public void TeleportPlayer(PlayerControllerB Player, Vector3 Position)
         {
             Player.TeleportPlayer(Position);
+        }
+
+        // Teleport to another player by name
+        public void TeleportToPlayer(PlayerControllerB Player, string PlayerName)
+        {
+            PlayerControllerB PlayerToTeleportTo = GetPlayerByName(PlayerName);
+            TeleportPlayer(Player, GetPlayerPosition(PlayerToTeleportTo));
+        }
+
+        // Teleport a player to another player by names
+        public void TeleportPlayerToPlayer(string PlayerName, string PlayerToTeleportToName)
+        {
+            PlayerControllerB Player = GetPlayerByName(PlayerName);
+            PlayerControllerB PlayerToTeleportTo = GetPlayerByName(PlayerToTeleportToName);
+            TeleportPlayer(Player, GetPlayerPosition(PlayerToTeleportTo));
         }
 
         // Set the player's playercontroller status
