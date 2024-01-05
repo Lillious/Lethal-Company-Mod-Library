@@ -68,12 +68,6 @@ namespace Mod_Example
 
 <br>
 
-- **ToggleVoiceChat(PlayerControllerB Player, bool VoiceChatEnabled)** > `void`
-  - Toggles voice chat
-
-- **IsVoiceChatEnabled(PlayerControllerB Player)** > `bool`
-  - Get voice chat status
-
 - **SetAntiCheatStatus(PlayerControllerB Player, bool IsAntiCheatEnabled)** > `void`
   - Set anti-cheat status
         
