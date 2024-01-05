@@ -679,20 +679,6 @@ namespace Lethal_Library {
             Player.voiceMuffledByEnemy = VoiceMuffeled;
         }
 
-        // Toggle voice chat
-        public void ToggleVoiceChat(PlayerControllerB Player, bool VoiceChatEnabled)
-        {
-            Dissonance.VoicePlayerState voicePlayerState = Player.GetComponent<Dissonance.VoicePlayerState>();
-            voicePlayerState.IsLocallyMuted = VoiceChatEnabled;
-        }
-
-        // Get player's voice chat status
-        public bool IsVoiceChatEnabled(PlayerControllerB Player)
-        {
-            Dissonance.VoicePlayerState voicePlayerState = Player.GetComponent<Dissonance.VoicePlayerState>();
-            return !voicePlayerState.IsLocallyMuted;
-        }
-
         // Add blood to player body
         public void AddBloodToPlayerBody(PlayerControllerB Player)
         {
