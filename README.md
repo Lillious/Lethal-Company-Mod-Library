@@ -39,7 +39,7 @@ namespace Mod_Example
 {
     public class Mod : MelonMod
     {
-        static Library LC_Lib = new Library();
+        private readonly Library LC_Lib = new Library();
     }
 }
 ```
