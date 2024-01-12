@@ -937,7 +937,7 @@ namespace Lethal_Library {
         // Get Terminal Reference
         public Terminal GetTerminal()
         {
-            return Object.FindObjectOfType<Terminal>()?.gameObject?.GetComponent<Terminal>();
+            return UnityEngine.Object.FindObjectOfType<Terminal>()?.gameObject?.GetComponent<Terminal>();
         }
 
         // Get Group Credits from Terminal
@@ -1036,7 +1036,7 @@ namespace Lethal_Library {
         // Get TimeOfDay reference
         public TimeOfDay GetTimeReference()
         {
-            return Object.FindObjectOfType<TimeOfDay>();
+            return UnityEngine.Object.FindObjectOfType<TimeOfDay>();
         }
 
         /* Ship Events */
@@ -1046,7 +1046,7 @@ namespace Lethal_Library {
         // Force all players to ship
         public void Eject ()
         {
-            StartOfRound startOfRound = Object.FindObjectOfType<StartOfRound>();
+            StartOfRound startOfRound = UnityEngine.Object.FindObjectOfType<StartOfRound>();
             startOfRound.ManuallyEjectPlayersServerRpc();
         }
 
